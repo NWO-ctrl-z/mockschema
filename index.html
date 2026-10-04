@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MockSchema</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+  <main class="container">
+    
+    <hgroup>
+      <h1>MockSchema</h1>
+      <p>Genera sentencias INSERT coherentes a partir de tu esquema SQL.</p>
+    </hgroup>
+
+    <section>
+      <label for="sql-input">1. Pega tu código CREATE TABLE (ordenado de padre a hijo):</label>
+      <textarea id="sql-input" rows="8" placeholder="CREATE TABLE clientes (&#10;  id INT PRIMARY KEY,&#10;  nombre VARCHAR(50)&#10;);"></textarea>
+    </section>
+
+    <!-- Aquí está el nuevo menú de idioma que app.js necesita -->
+    <section class="grid">
+      <div>
+        <label for="num-records">2. Cantidad de registros:</label>
+        <input type="number" id="num-records" value="5" min="1" max="5000">
+      </div>
+      <div>
+        <label for="language-select">Idioma de los datos:</label>
+        <select id="language-select">
+          <option value="es">Español</option>
+          <option value="en">Inglés</option>
+        </select>
+      </div>
+      <div>
+        <label>&nbsp;</label> 
+        <button id="generate-btn">Generar Datos</button>
+      </div>
+    </section>
+
+    <section>
+      <label for="sql-output">3. Resultado:</label>
+      <textarea id="sql-output" rows="10" readonly placeholder="Tus sentencias INSERT INTO ordenadas aparecerán aquí..."></textarea>
+      <button id="download-btn" class="secondary" disabled>Descargar archivo .sql</button>
+    </section>
+
+  </main>
+
+  <!-- se importo las 2 versiones de faker para que la app lo detecte -->
+  <script type="module">
+    import { faker, fakerES } from 'https://esm.sh/@faker-js/faker';
+    window.fakerEN = faker;   
+    window.fakerES = fakerES; 
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
