@@ -1,4 +1,4 @@
-// 1. SELECCIONAMOS LOS ELEMENTOS DEL HTML
+// 1. Seleccion de los elementos html
 const inputSql = document.getElementById('sql-input');
 const inputRegistros = document.getElementById('num-records');
 const btnGenerar = document.getElementById('generate-btn');
@@ -7,7 +7,7 @@ const btnDescargar = document.getElementById('download-btn');
 const selectIdioma = document.getElementById('language-select'); // <-- NUEVA LÍNEA DEL MENÚ
 
 
-//  MOTOR LÓGICO 1: EL PARSER 
+//  Motor logico 1: el parser
 function analizarSQL(codigoSql) {
     const tablasEncontradas = [];
     const fragmentos = codigoSql.split(/CREATE TABLE/i);
@@ -47,7 +47,7 @@ function analizarSQL(codigoSql) {
 }
 
 
-//  MOTOR LÓGICO 2: EL GENERADOR DE DATOS (CON IDIOMAS Y FORÁNEAS) 
+//  Motor logico 2: generador de datos
 function generarSentenciasInsert(estructura, cantidad) {
     let sqlFinal = '';
 
@@ -64,14 +64,14 @@ function generarSentenciasInsert(estructura, cantidad) {
                 const nombreCol = columna.toLowerCase();
                 let datoGenerado;
 
-                // Verificamos qué idioma eligió el usuario en el menú
+                // Se verifica qué idioma eligió el usuario en el menú
                 const fakerActivo = selectIdioma.value === 'es' ? window.fakerES : window.fakerEN;
 
                 // 1. Llave primaria
                 if (nombreCol === 'id' || nombreCol.startsWith('id_')) {
                     datoGenerado = i + 1; 
                 } 
-                // 2. Llave foránea (conecta con los registros que acabamos de crear)
+                // 2. Llave foránea 
                 else if (nombreCol.endsWith('_id')) {
                     datoGenerado = Math.floor(Math.random() * cantidad) + 1;
                 } 
@@ -103,7 +103,7 @@ function generarSentenciasInsert(estructura, cantidad) {
 }
 
 
-//  2 Y 3. INTEGRACIÓN FINAL Y INCLUYE LIMITE DE SEGURIDAD..
+//  2 y 3 integracion final y limite de seguridad
 btnGenerar.addEventListener('click', () => {
     const codigoSql = inputSql.value;
     let cantidad = parseInt(inputRegistros.value);
@@ -128,7 +128,7 @@ btnGenerar.addEventListener('click', () => {
 });
 
 
-//  4. FUNCIONALIDAD DEL BOTÓN DESCARGAR 
+//  4. boton de descargar 
 btnDescargar.addEventListener('click', () => {
     const contenido = outputSql.value;
     const archivoBlob = new Blob([contenido], { type: 'text/plain' });
