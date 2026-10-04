@@ -38,3 +38,10 @@ CREATE TABLE usuarios (
   nombre VARCHAR(50),
   correo VARCHAR(100)
 );
+```
+
+Salida generada por MockSchema:
+```sql
+INSERT INTO usuarios (id, nombre, correo) VALUES (1, 'Carlos Martínez', 'cmartinez22@gmail.com');
+INSERT INTO usuarios (id, nombre, correo) VALUES (2, 'Ana Rojas', 'ana.rojas@hotmail.com');
+```
